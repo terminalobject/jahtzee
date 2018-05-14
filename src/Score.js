@@ -54,4 +54,34 @@ Score.prototype.fourOfAKind = function () {
     return 0;
 };
 
+Score.prototype.isSmallStraight = function () {
+    return this.getRoll().sort().join(',') === [1, 2, 3, 4, 5].join(',');
+};
+
+Score.prototype.smallStraight = function () {
+    return this.isSmallStraight() ? 15 : 0;
+};
+
+Score.prototype.isLargeStraight = function () {
+    return this.getRoll().sort().join(',') === [2, 3, 4, 5, 6].join(',');
+};
+
+Score.prototype.largeStraight = function () {
+    return this.isLargeStraight() ? 20 : 0;
+};
+
+Score.prototype.fullHouse = function () {
+    for (let element in this.getRoll().sort()) {
+        if ((this.countInArray(this.getRoll(), this.getRoll()[0]) === 3)
+            && (this.countInArray(this.getRoll(), this.getRoll()[4]) === 2)) {
+            return this.getRoll()[0] * 3 + this.getRoll()[4] * 2
+        }
+        else if ((this.countInArray(this.getRoll(), this.getRoll()[0]) === 2)
+            && (this.countInArray(this.getRoll(), this.getRoll()[4]) === 3)) {
+            return this.getRoll()[0] * 2 + this.getRoll()[4] * 3
+        }
+    }
+    return 0;
+};
+
 module.exports = Score;

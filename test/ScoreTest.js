@@ -75,6 +75,36 @@ describe('Score', function() {
            let score = new Score([1, 1, 1, 2, 3]);
            expect(score.fourOfAKind()).to.equal(0);
        });
+   });
+   describe('smallStraight', function () {
+       it('should score a straight from 1 to 5', function () {
+           let score = new Score([1, 2, 3, 4, 5]);
+           expect(score.smallStraight()).to.equal(15)
+       });
+       it('should score 0 otherwise', function () {
+           let score = new Score([1, 2, 3, 4, 6]);
+           expect(score.smallStraight()).to.equal(0)
+       });
+   });
+   describe('largeStraight', function () {
+        it('should score a straight from 2 to 6', function () {
+            let score = new Score([2, 3, 4, 5, 6]);
+            expect(score.largeStraight()).to.equal(20)
+        });
+        it('should score 0 otherwise', function () {
+            let score = new Score([1, 2, 3, 5, 6]);
+            expect(score.largeStraight()).to.equal(0)
+        });
+   });
+   describe('fullHouse', function () {
+       it('should score a full house', function () {
+           let score = new Score([2, 2, 2, 3, 3]);
+           expect(score.fullHouse()).to.equal(12);
+       });
+       it('should score a 0 otherwise', function () {
+           let score = new Score([2, 2, 2, 3, 4]);
+           expect(score.fullHouse()).to.equal(0);
+       });
    })
 });
 
