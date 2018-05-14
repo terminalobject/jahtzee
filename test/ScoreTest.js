@@ -1,8 +1,8 @@
 'use strict';
-var expect = require('chai').expect;
-var Score = require('../src/Score.js');
+const expect = require('chai').expect;
+const Score = require('../src/Score.js');
 describe('Score', function() {
-   var score = new Score([1,2,3,4,5]);
+   let score = new Score([1,2,3,4,5]);
 
    it('should create an instance of Score', function () {
        expect(score).to.be.instanceOf(Score);
@@ -104,6 +104,22 @@ describe('Score', function() {
        it('should score a 0 otherwise', function () {
            let score = new Score([2, 2, 2, 3, 4]);
            expect(score.fullHouse()).to.equal(0);
+       });
+   });
+   describe('yahtzee', function () {
+       it('should score a yahtzee', function () {
+           let score = new Score([5, 5, 5, 5, 5]);
+           expect(score.yahtzee()).to.equal(50);
+       });
+       it('should score 0 otherwise', function () {
+           let score = new Score([1, 5, 5, 5, 5]);
+           expect(score.yahtzee()).to.equal(0);
+       });
+   });
+   describe('chance', function () {
+       it('should sum the face value of all dice, no matter what', function () {
+           let score = new Score([2, 2, 2, 2, 2]);
+           expect(score.chance()).to.equal(10);
        });
    })
 });
